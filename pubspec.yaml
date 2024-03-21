@@ -1,5 +1,5 @@
 name: flutter_gemini_chatbot
-description: A new Flutter project.
+description: A Gemini AI Chatbot built on Flutter.
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
@@ -38,8 +38,9 @@ dependencies:
   google_generative_ai: ^0.2.2
   flutter_markdown: ^0.6.22
   go_router: ^13.2.1
-  provider: ^6.1.2
   image_picker: ^1.0.7
+  flutter_gemini: ^2.0.3
+  styled_text: ^8.1.0
 
 dev_dependencies:
   flutter_test:

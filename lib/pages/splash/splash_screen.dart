@@ -17,7 +17,7 @@ class SplashScreen extends StatelessWidget {
           end: Alignment.bottomLeft,
           colors: [
             Colors.black,
-            Colors.blueGrey,
+            Colors.grey,
           ],
         ),
       ),
@@ -26,14 +26,14 @@ class SplashScreen extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Image.asset(
-              "assets/images/gemini_logo.png",
+              "assets/images/splash_logo.png",
               width: MediaQuery.of(context).size.width * 0.75,
               fit: BoxFit.cover,
             ),
-            const Padding(
-              padding: EdgeInsets.only(top: 24.0),
+            Padding(
+              padding: const EdgeInsets.only(top: 24.0),
               child: CircularProgressIndicator(
-                color: Colors.purpleAccent,
+                color: Colors.yellow[800],
               ),
             )
           ],

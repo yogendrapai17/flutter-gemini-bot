@@ -29,6 +29,7 @@ class GeminiBotApp extends StatelessWidget {
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(
           brightness: Brightness.dark,
+          primary: Colors.yellow[800],
           seedColor: const Color.fromARGB(255, 171, 222, 244),
         ),
         useMaterial3: true,

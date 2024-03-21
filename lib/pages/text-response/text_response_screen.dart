@@ -196,7 +196,7 @@ class _TextResponseScreenState extends State<TextResponseScreen> {
 
       setState(() {});
 
-      _scrollController.jumpTo(_scrollController.position.maxScrollExtent);
+      _scrollDown();
 
       final response =
           await _visionModel.generateContent([Content.multi(promptContent)]);
@@ -231,7 +231,7 @@ class _TextResponseScreenState extends State<TextResponseScreen> {
 
     _textFieldFocus.unfocus();
     _textController.clear();
-    _scrollController.jumpTo(_scrollController.position.maxScrollExtent);
+    _scrollDown();
 
     setState(() {
       _loading = true;
