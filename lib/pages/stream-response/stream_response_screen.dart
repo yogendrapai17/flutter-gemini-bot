@@ -31,6 +31,12 @@ class _StreamResponseScreenState extends State<StreamResponseScreen> {
     _model.startChat();
   }
 
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    precacheImage(const AssetImage('assets/images/genie_1.png'), context);
+  }
+
   // Function to generate text with streaming
   Future<void> generateTextStream(String prompt) async {
     if (prompt.isEmpty) return;

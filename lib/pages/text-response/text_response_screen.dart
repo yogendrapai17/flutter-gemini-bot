@@ -45,6 +45,13 @@ class _TextResponseScreenState extends State<TextResponseScreen> {
     _chat = _model.startChat();
   }
 
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+
+    precacheImage(const AssetImage('assets/images/genie_2.png'), context);
+  }
+
   void _scrollDown() {
     WidgetsBinding.instance.addPostFrameCallback(
       (_) => _scrollController.animateTo(
