@@ -15,7 +15,7 @@ class TextResponseScreen extends StatefulWidget {
 }
 
 class _TextResponseScreenState extends State<TextResponseScreen> {
-  final String _apiKey = Globals.geminiAPIKey;
+  final String _apiKey = const String.fromEnvironment('API_KEY');
   late final GenerativeModel _model;
   late final GenerativeModel _visionModel;
   late final ChatSession _chat;
@@ -34,12 +34,12 @@ class _TextResponseScreenState extends State<TextResponseScreen> {
   void initState() {
     super.initState();
     _model = GenerativeModel(
-      model: 'gemini-pro',
+      model: Globals.geminiProModel,
       apiKey: _apiKey,
       safetySettings: _safetySettings,
     );
     _visionModel = GenerativeModel(
-        model: 'gemini-pro-vision',
+        model: Globals.geminiProVisionModel,
         apiKey: _apiKey,
         safetySettings: _safetySettings);
     _chat = _model.startChat();

@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-//const String _apiKey = String.fromEnvironment('API_KEY');
-
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 

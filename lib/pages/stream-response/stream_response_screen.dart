@@ -10,6 +10,7 @@ class StreamResponseScreen extends StatefulWidget {
 }
 
 class _StreamResponseScreenState extends State<StreamResponseScreen> {
+  final String _apiKey = const String.fromEnvironment('API_KEY');
   late GenerativeModel _model;
   String _generatedText = '';
   String? _prompt;
@@ -23,8 +24,8 @@ class _StreamResponseScreenState extends State<StreamResponseScreen> {
   void initState() {
     super.initState();
     _model = GenerativeModel(
-      model: 'gemini-pro',
-      apiKey: Globals.geminiAPIKey,
+      model: Globals.geminiProModel,
+      apiKey: _apiKey,
     );
 
     _model.startChat();
