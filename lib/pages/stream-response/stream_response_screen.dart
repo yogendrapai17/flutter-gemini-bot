@@ -12,7 +12,7 @@ class StreamResponseScreen extends StatefulWidget {
 class _StreamResponseScreenState extends State<StreamResponseScreen> {
   late GenerativeModel _model;
   String _generatedText = '';
-  String _prompt = '';
+  String? _prompt;
 
   final ScrollController _scrollController = ScrollController();
   final TextEditingController _textController = TextEditingController();
@@ -38,15 +38,20 @@ class _StreamResponseScreenState extends State<StreamResponseScreen> {
     setState(() {
       _prompt = prompt;
       _generatedText = '';
+      _loading = true;
     });
 
-    final response = _model.generateContentStream([Content.text(_prompt)]);
+    final response = _model.generateContentStream([Content.text(_prompt!)]);
     response.listen((chunk) {
       if (chunk.text == null) return;
       setState(() {
         _generatedText += chunk.text!.replaceAll(RegExp(r'\*\*'), "");
       });
       _scrollDown();
+    });
+
+    setState(() {
+      _loading = false;
     });
   }
 
@@ -88,7 +93,7 @@ class _StreamResponseScreenState extends State<StreamResponseScreen> {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: const Text("Gemini Search: Stream Response"),
+        title: const Text("Gemini Search"),
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
@@ -101,22 +106,37 @@ class _StreamResponseScreenState extends State<StreamResponseScreen> {
               padding: const EdgeInsets.symmetric(horizontal: 12.0),
               shrinkWrap: false,
               children: [
-                if (_prompt.isNotEmpty)
-                  Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(
-                          10.0), // Adjust the radius as needed
-                      color: Colors.yellow,
-                    ),
-                    padding: const EdgeInsets.all(8.0),
-                    margin: const EdgeInsets.only(bottom: 12.0),
-                    alignment: Alignment.center,
-                    child: Text(
-                      "Prompt: $_prompt",
-                      style:
-                          const TextStyle(fontSize: 17.0, color: Colors.black),
-                    ),
-                  ),
+                (_prompt != null)
+                    ? Container(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(
+                              10.0), // Adjust the radius as needed
+                          color: Colors.yellow,
+                        ),
+                        padding: const EdgeInsets.all(8.0),
+                        margin: const EdgeInsets.only(bottom: 12.0),
+                        alignment: Alignment.center,
+                        child: Text(
+                          "Prompt: $_prompt",
+                          style: const TextStyle(
+                              fontSize: 17.0, color: Colors.black),
+                        ),
+                      )
+                    : Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Padding(
+                              padding: const EdgeInsets.only(bottom: 24.0),
+                              child: Image.asset("assets/images/genie_1.png")),
+                          const Text(
+                            "Start your search with a prompt",
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 22.0),
+                          )
+                        ],
+                      ),
                 Text(
                   _generatedText,
                   style: const TextStyle(fontSize: 17.0),
@@ -134,7 +154,6 @@ class _StreamResponseScreenState extends State<StreamResponseScreen> {
                     child: TextField(
                       keyboardType: TextInputType.text,
                       textCapitalization: TextCapitalization.sentences,
-                      autofocus: true,
                       focusNode: _textFieldFocus,
                       decoration: textFieldDecoration,
                       controller: _textController,

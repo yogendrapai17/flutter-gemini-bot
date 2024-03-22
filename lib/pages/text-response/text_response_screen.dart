@@ -83,7 +83,7 @@ class _TextResponseScreenState extends State<TextResponseScreen> {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: const Text("Chat with Gemini: Text Response"),
+        title: const Text("Chat with Gemini"),
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
@@ -91,29 +91,50 @@ class _TextResponseScreenState extends State<TextResponseScreen> {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Expanded(
-              child: _apiKey.isNotEmpty
-                  ? ListView.builder(
-                      controller: _scrollController,
-                      itemBuilder: (context, idx) {
-                        final content = _generatedContent[idx];
-                        return ChatMessageWidget(
-                          text: content.text,
-                          image: content.image,
-                          isFromUser: content.fromUser,
-                        );
-                      },
-                      itemCount: _generatedContent.length,
-                    )
-                  : ListView(
-                      children: const [
-                        Text(
-                          'No API key found. Please provide an API Key using '
-                          "'--dart-define' to set the 'API_KEY' declaration.",
-                        ),
-                      ],
+            (_generatedContent.isNotEmpty)
+                ? Expanded(
+                    child: _apiKey.isNotEmpty
+                        ? ListView.builder(
+                            controller: _scrollController,
+                            itemBuilder: (context, idx) {
+                              final content = _generatedContent[idx];
+                              return ChatMessageWidget(
+                                text: content.text,
+                                image: content.image,
+                                isFromUser: content.fromUser,
+                              );
+                            },
+                            itemCount: _generatedContent.length,
+                          )
+                        : ListView(
+                            children: const [
+                              Text(
+                                'No API key found. Please provide an API Key using '
+                                "'--dart-define' to set the 'API_KEY' declaration.",
+                              ),
+                            ],
+                          ),
+                  )
+                : Expanded(
+                    child: SingleChildScrollView(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Padding(
+                              padding: const EdgeInsets.only(bottom: 24.0),
+                              child: Image.asset("assets/images/genie_2.png")),
+                          const Text(
+                            "Feels so lonely here, \nStart with a wish",
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 24.0),
+                          )
+                        ],
+                      ),
                     ),
-            ),
+                  ),
             Padding(
               padding: const EdgeInsets.symmetric(
                 vertical: 25,
@@ -125,7 +146,6 @@ class _TextResponseScreenState extends State<TextResponseScreen> {
                     child: TextField(
                       keyboardType: TextInputType.text,
                       textCapitalization: TextCapitalization.sentences,
-                      autofocus: true,
                       focusNode: _textFieldFocus,
                       decoration: textFieldDecoration,
                       controller: _textController,

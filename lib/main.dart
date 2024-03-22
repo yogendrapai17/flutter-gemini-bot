@@ -1,21 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gemini_chatbot/pages/home/home_screen.dart';
+import 'package:flutter_gemini_chatbot/pages/stream-response/stream_response_screen.dart';
+import 'package:flutter_gemini_chatbot/pages/text-response/text_response_screen.dart';
 import 'package:go_router/go_router.dart';
 
 import 'pages/splash/splash_screen.dart';
 
 void main() async {
-  //runApp(const MyApp());
-
   runApp(const GeminiBotApp());
-
-  // For text-only input, use the gemini-pro model
-  // final model = GenerativeModel(
-  //     model: Globals.geminiProModel, apiKey: Globals.geminiAPIKey);
-
-  // final content = [Content.text('Write a story about a magic backpack.')];
-  // final response = await model.generateContent(content);
-  // debugPrint(response.text);
 }
 
 class GeminiBotApp extends StatelessWidget {
@@ -47,6 +39,18 @@ class GeminiBotApp extends StatelessWidget {
             path: '/home',
             builder: (BuildContext context, GoRouterState state) {
               return const HomeScreen();
+            },
+          ),
+          GoRoute(
+            path: '/search',
+            builder: (BuildContext context, GoRouterState state) {
+              return const StreamResponseScreen();
+            },
+          ),
+          GoRoute(
+            path: '/chat',
+            builder: (BuildContext context, GoRouterState state) {
+              return const TextResponseScreen();
             },
           ),
         ],
