@@ -1,16 +1,15 @@
-# flutter_gemini_chatbot
+# Super Genie - AI Bot Application
 
-A new Flutter project.
+A Gemini Bot built over Flutter and Dart 🚀
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+### Prerequisites
+- Flutter and Dart v3.2.0+ installed
+- Gemini API Key from Google AI Studio. [Generate API Key](https://makersuite.google.com/app/apikey)
 
-A few resources to get you started if this is your first Flutter project:
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+### Steps to Run the Application
+- Clone the Repository/Download .zip and extract contents
+- Open in VSCode/Android Studio and choose the target device of your choice.
+- In the terminal of the IDE, run "flutter run --dart-define=API_KEY=$API_KEY" (Replace the $API_KEY with the API key generated from Google AI Studio)
